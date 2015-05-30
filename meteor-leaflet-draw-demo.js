@@ -13,7 +13,17 @@ if (Meteor.isClient) {
   var drawnItems = L.featureGroup().addTo(map);
   
   map.addControl(new L.Control.Draw({
-			edit: { featureGroup: drawnItems }
+      draw: {
+        polyline: false,
+				polygon: false,
+				circle: false,
+				rectangle: false
+      },
+			edit: {
+			  featureGroup: drawnItems,
+			  edit: false,
+			  remove: false
+			}
 		}));
 		
 		map.on('draw:created', function(event) {
