@@ -53,10 +53,10 @@ if (Meteor.isClient) {
 };
 
 $(function() {
-  $(window).resize(function() {
-    $('#map').css('height', window.innerHeight - 82);
-  });
-  $(window).resize(); // trigger resize event
+  $(document).ready( function(){
+  $('#map').css({height: $(window).height() + 'px'});
+});
+$(window).resize(function(){$('#map').css({height: $(window).height() + 'px'});});
 });
 }
 

@@ -8,3 +8,4 @@ meteor-platform
 autopublish
 insecure
 bdunnette:leaflet-draw
+twbs:bootstrap
