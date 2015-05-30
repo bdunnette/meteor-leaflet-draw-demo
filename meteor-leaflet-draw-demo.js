@@ -20,7 +20,9 @@ if (Meteor.isClient) {
 				rectangle: false
       },
 			edit: {
-			  featureGroup: drawnItems
+			  featureGroup: drawnItems,
+			  edit: false,
+			  remove: false
 			}
 		}));
 		
