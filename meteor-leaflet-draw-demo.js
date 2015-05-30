@@ -8,7 +8,7 @@ if (Meteor.isClient) {
     doubleClickZoom: false
   }).setView([45, -93.2], 12);
 
-  L.tileLayer.provider('OpenStreetMap').addTo(map);
+  L.tileLayer.provider('MapQuestOpen.OSM').addTo(map);
 
   var drawnItems = L.featureGroup().addTo(map);
   
@@ -42,7 +42,7 @@ if (Meteor.isClient) {
   var query = Markers.find();
   query.observe({
     added: function (document) {
-      var marker = L.marker(document.latlng).addTo(map)
+      var marker = L.marker(document.latlng).addTo(drawnItems)
         .on('click', function(event) {
           console.log(marker);
         });
