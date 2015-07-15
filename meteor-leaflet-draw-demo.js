@@ -21,7 +21,7 @@ if (Meteor.isClient) {
       edit: {
         featureGroup: drawnItems,
         edit: false,
-        remove: false
+        remove: true
       }
     }));
 
@@ -48,9 +48,12 @@ if (Meteor.isClient) {
     });
 
     map.on('draw:deleted', function(event) {
-      var layer = event.layer;
-      console.log(event.layer);
-      console.log(event.layerType);
+      console.log(event);
+      console.log(event.layers._layers);
+      for (var l in event.layers._layers) {
+        console.log(l);
+        Markers.remove({_id: l});
+      }
     });
 
     var query = Markers.find();
@@ -59,10 +62,14 @@ if (Meteor.isClient) {
         console.log(document);
         switch (document.layerType) {
         case 'marker':
-          var marker = L.marker(document.latlng).addTo(drawnItems);
+          var marker = L.marker(document.latlng);
+          marker._leaflet_id = document._id;
+          marker.addTo(drawnItems);
           break;
         case 'circle':
-          var circle = L.circle(document.latlng, document.radius).addTo(drawnItems);
+          var circle = L.circle(document.latlng, document.radius);
+          circle._leaflet_id = document._id;
+          circle.addTo(drawnItems);
           break;
         }
       },
