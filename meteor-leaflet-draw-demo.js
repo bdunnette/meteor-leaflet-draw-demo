@@ -98,14 +98,7 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.startup(function() {
     // code to run on server at startup
-    Queue.setInterval('deleteAllMarkers','Meteor.call("deleteAllMarkers")', 86400000); /* once a day */
+    Queue.setInterval('deleteAllMarkers','Markers.remove({})', 86400000); /* once a day */
     Queue.run();
-  });
-  
-  Meteor.methods({
-    'deleteAllMarkers': function(){
-      console.log("Removing markers...");
-      Markers.remove({});
-    }
   });
 }
